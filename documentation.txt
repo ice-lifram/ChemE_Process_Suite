@@ -1,8 +1,11 @@
+Written by J.I. Marfil
+
 Day 1: Experimentation
 	- Setting up Git (add, commit, log)
 	- Reviewing how to properly use dictionaries
 	- Importing Python files into another Python file
 	- Currently writing a pseudocode
+
 Day 2: Logic Review and Testing
 	- Completing Periodic Table + Molar Mass dictionary on engine_mmass.py with assistance to Claude Code
 	- First logic testing in logic.py, to review how to get the data in the dictionary
@@ -22,3 +25,18 @@ Day 2: Logic Review and Testing
 		-Create the other tools
 		-Setup the menu
 		-Create the interface
+
+Day 3: Continuation
+	- Fixing the input() and print() statements
+	- Building the engines.
+		- Stoichiometry done
+	- Deciding a standard unit:
+		- Volume - L
+		- Mass - g
+		- Moles - mol
+	- logic.py was updated and refactored
+	- Test cases for stoichiometry was generated
+	- Other underlying problems:
+		- The GUI (I must refactor every print and input functions)
+		- Error handlings (must fix immediately)
+		- The strings (instructions must be clear)

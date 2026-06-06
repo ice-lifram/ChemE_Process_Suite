@@ -1,0 +1,87 @@
+CONVERSATION LOG: ChemE Process Suite Project Initiation
+Date: 2026-05-23
+
+1. Project Goals:
+- Build a professional engineering portfolio piece: "CHME Process Suite".
+- 30-day challenge split into Phase 1 (Foundation: Stoichiometry, Material Balances, Analytic Chem) and Phase 2 (Expansion: Thermo, Flow, Reactors).
+
+2. Setup Completed:
+- Project Folder: `ChemE_Process_Suite`
+- Directory Structure:
+    - `/engine`: For calculation logic.
+    - `/gui`: For user interface components.
+    - `/data`: For storing periodic table and other reference data.
+- Files created: `main.py`, `README.md`, `.gitignore`.
+- Environment: Python venv created and installed `numpy`, `pandas`, `matplotlib`, `customtkinter`.
+
+3. Git Learning:
+- Established the conceptual model: Git (Local Save Game) vs. GitHub (Cloud Backup).
+- Key commands discussed: `git status`, `git add`, `git commit`, `git push`, `git diff`, `git log`.
+
+4. Current Task: Molar Mass Calculator (Days 1-5)
+- Approach: Building from scratch to learn parsing and logic rather than using external libraries.
+- Architecture:
+    - Use a JSON file (`data/elements.json`) to store atomic weights.
+    - Implement custom parsing logic in `engine/molar_mass.py` to handle:
+        - Simple formulas (e.g., H2O)
+        - Parentheses (e.g., Ca(NO3)2)
+        - Case sensitivity (e.g., Co vs CO)
+- Next Immediate Action: User to create `data/elements.json` and start implementing the logic in `engine/molar_mass.py`.
+
+--------------------------------------------------------------------------------
+PROJECT UPDATE: 2026-06-06 - Core Implementation & Architecture Shift
+
+5. Implementation Progress:
+- Completed `engine_mmass.py`: Implemented a full Python dictionary containing molar masses for all periodic table elements.
+- Completed `logic.py` (CLI):
+    - Integrated a `while True` session loop for continuous use.
+    - Implemented input normalization using `.capitalize()` to handle case sensitivity.
+    - Implemented "Graceful Error Handling" using the `.get()` method to prevent `KeyError` crashes.
+    - Transitioned logic into a Class-based structure (`ChemESuite`) to support future modular expansion.
+
+6. Key Python Concepts Learned/Implemented:
+- Dictionaries & `.get()`: Understanding how to retrieve values safely without risking program crashes.
+- Input Normalization: Using string methods (`.capitalize()`, `.lower()`) to ensure user input matches database keys.
+- Class Architecture: Shifting from linear scripts to Object-Oriented Programming (OOP) to organize the "Hub" menu and separate calculation modules.
+- Execution Context: Detailed study of `if __name__ == "__main__":` to differentiate between a file being run as the main script versus being imported as a module.
+
+7. Updated Roadmap (Modular Expansion):
+- Transition from a "Lookup Tool" to a "Process Suite."
+- Planned Module Files in `/engine`:
+    - `stoichiometry.py`: Theoretical yield, limiting reagents.
+    - `titration.py`: Concentration calculations ($C_1V_1 = C_2V_2$).
+    - `equilibrium.py`: $K_c$, $K_p$, and equilibrium shifts.
+    - `material_balance.py`: Mass balances for steady-state systems.
+- Interface Goal: Future implementation of a `customtkinter` GUI to replace the CLI.
+
+--------------------------------------------------------------------------------
+PROJECT UPDATE: 2026-06-07 - Stoichiometry Engine & Architectural Patterns
+
+8. Stoichiometry Implementation:
+- Started `engine/stoichiometry.py`.
+- Corrected "Interface Leak": Moved `input()` and `print()` from engine to `logic.py`.
+- Established "Pure Engine Rule": Engine functions take arguments and return values, remaining agnostic of the interface (CLI/GUI).
+
+9. Architectural Patterns Introduced:
+- Atomic Functions: Breaking complex calculations into the smallest possible reusable pieces.
+    - Intra-substance conversion: `mass_to_moles`, `moles_to_mass` (Unit changes).
+    - Inter-substance conversion: `mole_ratio_conversion` (Substance changes).
+- Pipeline Architecture: Chaining atomic functions to solve complex problems (e.g., `mass_mass_calculation`).
+- Dimensional Analysis Mapping: Aligned programmatic "Step-by-Step Pipeline" with chemical "Chain of Fractions" on paper.
+
+10. Key Learning Milestones:
+- Understanding the "God Object" antipattern and why modularity is critical for GUI migration.
+- Distinguishing between Molar Mass (Unit Border) and Coefficients (Substance Border) in logic.
+- Shifting from "Developer" level (working code) to "Architect" level (maintainable/scalable systems).
+
+--------------------------------------------------------------------------------
+PROJECT UPDATE: 2026-06-07 - Final Stoichiometry Validation
+
+11. Final Integration:
+- Verified `engine/stoichiometry.py` as a pure function library.
+- Linked stoichiometry tools into `logic.py` hub.
+- Resolved critical bugs:
+    - Fixed `AttributeError` by correcting dictionary naming (`elements_molarmass`).
+    - Prevented `TypeError` (NoneType) by ensuring `.capitalize()` is applied to all element inputs.
+    - Fixed syntax errors regarding missing parentheses.
+- Validated the full "Mass to Mass" pipeline from user input to final numeric output.
