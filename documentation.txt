@@ -1,0 +1,5 @@
+Day 1: Experimentation
+	- Setting up Git (add, commit, log)
+	- Reviewing how to properly use dictionaries
+	- Importing Python files into another Python file
+	- Currently writing a pseudocode
