@@ -3,3 +3,15 @@ Day 1: Experimentation
 	- Reviewing how to properly use dictionaries
 	- Importing Python files into another Python file
 	- Currently writing a pseudocode
+Day 2: Logic Review and Testing
+	- Completing Periodic Table + Molar Mass dictionary on engine_mmass.py with assistance to Claude Code
+	- First logic testing in logic.py, to review how to get the data in the dictionary
+	- Planning Structure
+		- Initial Structure:
+		logic.py -> Menu + Main Logic
+		|
+		|--engine_mmass.py -> dictionary
+		|--stoic.py
+		|--titration.py
+		|--equilibrium.py
+		|--mass_balance.py
