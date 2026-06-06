@@ -15,3 +15,10 @@ Day 2: Logic Review and Testing
 		|--titration.py
 		|--equilibrium.py
 		|--mass_balance.py
+	- Class created
+		-Main menu implemented
+		-Initializer __name__
+	- What to do next?
+		-Create the other tools
+		-Setup the menu
+		-Create the interface
