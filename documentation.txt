@@ -26,7 +26,7 @@ Day 2: Logic Review and Testing
 		-Setup the menu
 		-Create the interface
 
-Day 3: Continuation
+Day 3.1: Continuation
 	- Fixing the input() and print() statements
 	- Building the engines.
 		- Stoichiometry done
@@ -35,8 +35,16 @@ Day 3: Continuation
 		- Mass - g
 		- Moles - mol
 	- logic.py was updated and refactored
-	- Test cases for stoichiometry was generated
 	- Other underlying problems:
 		- The GUI (I must refactor every print and input functions)
 		- Error handlings (must fix immediately)
 		- The strings (instructions must be clear)
+
+Day 3.2:
+	- Fixing the functions so it also parses compounds such H2O, H2SO4, etc...
+		- Made an AI make the parser and update logic.py, then reviewed.
+	- Initial plans for stoichiometry:
+		- Cleaner molar mass parser
+		- The Limiting Reagent Tool
+	- Create/Automate making the JSON file from the periodic table in engine_mmass.py
+	- 
