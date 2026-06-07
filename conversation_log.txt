@@ -85,3 +85,26 @@ PROJECT UPDATE: 2026-06-07 - Final Stoichiometry Validation
     - Prevented `TypeError` (NoneType) by ensuring `.capitalize()` is applied to all element inputs.
     - Fixed syntax errors regarding missing parentheses.
 - Validated the full "Mass to Mass" pipeline from user input to final numeric output.
+
+--------------------------------------------------------------------------------
+PROJECT UPDATE: 2026-06-07 - Formula Parser & Data Decoupling
+
+12. Molar Mass Parser Implementation:
+- Created `engine/molar_mass_parser.py` using a recursive descent algorithm.
+- Enabled support for complex formulas: simple compounds (H2O), multi-character elements (NaCl), and nested groups (Ca(NO3)2).
+- Integrated Regex for robust tokenization of elements and subscripts.
+
+13. Interface Refactoring:
+- Updated `logic.py` to integrate the parser across all stoichiometry tools.
+- Transitioned from single-element lookups to full compound formula inputs.
+- Implemented professional f-string output formatting for all calculation results.
+- Added comprehensive try-except error handling to prevent crashes during invalid formula entry.
+
+14. Data Migration (JSON):
+- Decoupled data from logic by migrating the Periodic Table from a Python dictionary to `engine/data/elements.json`.
+- Refactored `engine/data/engine_mmass.py` into a dynamic loader that reads JSON data.
+- Achieved a "Zero-Breakage" migration: other modules continue to use the `elements_molarmass` variable without modification.
+
+15. Documentation Expansion:
+- Created `engine/parser_guide.md` for technical analysis of the recursive parser.
+- Created `def_of_terms.md` to define chemical and software engineering terminology.

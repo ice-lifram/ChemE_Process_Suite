@@ -8,12 +8,20 @@ The **ChemE Process Suite** is a modular software toolkit designed for chemical 
 ## 📂 Module Directory & Functionality
 
 ### 1. `engine/data/engine_mmass.py`
-**Purpose:** Acts as the primary database for atomic weights.
+**Purpose:** Acts as the primary data loader for atomic weights.
+- **Architecture:** Loads molar mass data from an external `elements.json` file to decouple data from logic.
 - **Key Components:**
-    - `elements_molarmass` (Dictionary): A comprehensive mapping of chemical element symbols to their respective molar masses in g/mol.
+    - `elements_molarmass` (Dictionary): A mapping of chemical element symbols to their respective molar masses in g/mol, populated from JSON.
 - **Usage:** Imported by engine modules to provide accurate mass data for stoichiometric calculations.
 
-### 2. `engine/stoichiometry.py`
+### 2. `engine/molar_mass_parser.py`
+**Purpose:** Translates chemical formulas into molar masses.
+- **Architecture:** Uses a recursive descent algorithm to handle simple compounds and nested groups (e.g., `Ca(NO3)2`).
+- **Key Functions:**
+    - `calculate_molar_mass()`: The main entry point that processes a formula string and returns the total mass.
+- **Usage:** Called by `logic.py` to automatically determine molar masses without requiring user lookup.
+
+### 3. `engine/stoichiometry.py`
 **Purpose:** Core logic for stoichiometric conversions.
 - **Architecture:** Implements an **Atomic Design Pattern** where complex calculations are broken into reusable, pure functions.
 - **Atomic Helpers:**
