@@ -1,5 +1,6 @@
 import engine.data.engine_mmass as mw
 import engine.stoichiometry as st
+import engine.molar_mass_parser as parser
 
 class ChESuite():
     def __init__(self):
@@ -8,22 +9,20 @@ class ChESuite():
     
     def molarmass_tool(self):
         while True:
-                element = input("Enter element symbols (press q to quit): ")
+                element = input("Enter chemical formula (press q to quit): ")
         
                 if element.lower() == "q":
                     break
 
-                element = element.capitalize()
-                mass = mw.elements_molarmass.get(element)
-    
-                if mass is not None:
-                    print(element, mass)
-                else:
-                    print(f"Sorry, {element} is not found in the Periodic Table")
+                try:
+                    mass = parser.calculate_molar_mass(element)
+                    print(f"The molar mass of {element} is {mass} g/mol.")
+                except ValueError as e:
+                    print(f"Error: {e}")
     
     def stoichiometry(self):
         while True:
-            print("n/ Select Options (enter q to exit"))
+            print("n/ Select Options (enter q to exit)")
             print("1. Mass to Mole")
             print("2. Mole to Mass")
             print("3. Mole to Mole")
@@ -32,28 +31,59 @@ class ChESuite():
             print("----------------------")
 
             if option == "1":
-                mass = float(input("Enter mass: "))
-                molar_mass = mw.elements_molarmass.get(input("Enter element symbol for molar mass: ").capitalize())
-                print(st.mass_to_moles(mass, molar_mass)) # output to be refactored soon "f("The result is {function})"; same to other outputs
+                try:
+                    mass = float(input("Enter mass (g): "))
+                    formula = input("Enter compound formula: ")
+                    molar_mass = parser.calculate_molar_mass(formula)
+                    result = st.mass_to_moles(mass, molar_mass)
+                    print(f"For {mass}g of {formula} ({molar_mass} g/mol), the result is {result:.4f} moles.")
+                except ValueError as e:
+                    print(f"Input Error: {e}")
+                except Exception as e:
+                    print(f"An unexpected error occurred: {e}")
 
             elif option == "2":
-                moles = float(input("Enter mole: "))
-                molar_mass = mw.elements_molarmass.get(input("Enter element's symbol for its molar mass: ").capitalize())
-                print(st.moles_to_mass(moles, molar_mass))
+                try:
+                    moles = float(input("Enter moles (mol): "))
+                    formula = input("Enter compound formula: ")
+                    molar_mass = parser.calculate_molar_mass(formula)
+                    result = st.moles_to_mass(moles, molar_mass)
+                    print(f"For {moles} moles of {formula} ({molar_mass} g/mol), the result is {result:.4f} g.")
+                except ValueError as e:
+                    print(f"Input Error: {e}")
+                except Exception as e:
+                    print(f"An unexpected error occurred: {e}")
 
             elif option == "3":
-                moles = float(input("Enter moles: "))
-                coefA = float(input("Enter the coefficient A/number of mole A of compound: "))
-                coefB = float(input("Enter coefficient B/number of mole B of compound: "))
-                print(st.mole_ratio_conversion(moles, coefA, coefB))
+                try:
+                    moles = float(input("Enter moles of substance A: "))
+                    coefA = float(input("Enter coefficient of A in balanced equation: "))
+                    coefB = float(input("Enter coefficient of B in balanced equation: "))
+                    result = st.mole_ratio_conversion(moles, coefA, coefB)
+                    print(f"Using a mole ratio of {coefB}:{coefA}, {moles} moles of A produces {result:.4f} moles of B.")
+                except ValueError as e:
+                    print(f"Input Error: {e}")
+                except Exception as e:
+                    print(f"An unexpected error occurred: {e}")
 
             elif option == "4":
-                massA = float(input("Enter mass: "))
-                molarmassA = mw.elements_molarmass.get(input("Enter element symbol for molar mass A: ").capitalize()) 
-                molarmassB = mw.elements_molarmass.get(input("Enter element symbol for molar mass B: ").capitalize())
-                coefA = float(input("Enter coefficient A/number of moles in element A: "))
-                coefB = float(input("Enter coefficient B/number of moles in element B: "))
-                print(st.mass_to_mass_calculations(massA, molarmassA, molarmassB, coefA, coefB))
+                try:
+                    massA = float(input("Enter mass of substance A (g): "))
+                    formulaA = input("Enter compound formula for A: ")
+                    molarmassA = parser.calculate_molar_mass(formulaA)
+
+                    formulaB = input("Enter compound formula for B: ")
+                    molarmassB = parser.calculate_molar_mass(formulaB)
+
+                    coefA = float(input("Enter coefficient of A: "))
+                    coefB = float(input("Enter coefficient of B: "))
+
+                    result = st.mass_to_mass_calculations(massA, molarmassA, molarmassB, coefA, coefB)
+                    print(f"Starting with {massA}g of {formulaA}, the theoretical yield of {formulaB} is {result:.4f} g.")
+                except ValueError as e:
+                    print(f"Input Error: {e}")
+                except Exception as e:
+                    print(f"An unexpected error occurred: {e}")
 
             elif option == "q":
                 break
