@@ -1,0 +1,106 @@
+# TEST CASES: ChemE Process Suite
+# This file contains verified test inputs and expected outputs to ensure the
+# accuracy and robustness of the stoichiometry engine and formula parser.
+
+===============================================================================
+1. MOLAR MASS LOOKUP (Formula Parser)
+===============================================================================
+Scenario: Verify the parser can handle different levels of chemical complexity.
+
+| Input Formula | Expected Mass (g/mol) | Case Type            |
+|---------------|----------------------|---------------------|
+| H             | 1.008               | Single Element       |
+| O             | 15.999              | Single Element       |
+| H2O           | 18.015              | Simple Compound      |
+| NaCl          | 58.44               | Binary Compound      |
+| H2SO4         | 98.079              | Polyatomic Acid      |
+| Ca(NO3)2      | 164.087             | Nested Group         |
+| Fe2(SO4)3     | 399.88              | Nested Group (Multiple)|
+| Al2(SO4)3     | 342.15              | Nested Group (Multiple)|
+| Xy            | ERROR: Element not found | Invalid Element   |
+| 2H2O          | ERROR: Unexpected digit | Syntax Error      |
+
+===============================================================================
+2. MASS TO MOLE
+===============================================================================
+Formula: H2O (18.015 g/mol)
+- Input Mass: 10.0 g
+- Expected: 10 / 18.015 = 0.5551 mol
+
+Formula: NaCl (58.44 g/mol)
+- Input Mass: 50.0 g
+- Expected: 50 / 58.44 = 0.8556 mol
+
+===============================================================================
+3. MOLE TO MASS
+===============================================================================
+Formula: H2SO4 (98.079 g/mol)
+- Input Moles: 2.0 mol
+- Expected: 2.0 * 98.079 = 196.1580 g
+
+Formula: Ca(NO3)2 (164.087 g/mol)
+- Input Moles: 0.1 mol
+- Expected: 0.1 * 164.087 = 16.4087 g
+
+===============================================================================
+4. MOLE TO MOLE
+===============================================================================
+Scenario: 2 H2 + O2 -> 2 H2O
+- Input Moles A: 5.0 mol (H2)
+- Coefficient A: 2
+- Coefficient B: 1 (O2)
+- Expected: 5.0 * (1 / 2) = 2.5000 mol O2
+
+Scenario: N2 + 3 H2 -> 2 NH3
+- Input Moles A: 1.0 mol (N2)
+- Coefficient A: 1
+- Coefficient B: 2 (NH3)
+- Expected: 1.0 * (2 / 1) = 2.0000 mol NH3
+
+===============================================================================
+5. MASS TO MASS (The Full Pipeline)
+===============================================================================
+Reaction: 2 H2 + O2 -> 2 H2O
+- Substance A: H2 (2.016 g/mol)
+- Substance B: H2O (18.015 g/mol)
+- Coef A: 2
+- Coef B: 2
+- Input Mass A: 10.0 g
+- Calculation:
+    1. 10 / 2.016 = 4.9602 mol H2
+    2. 4.9602 * (2 / 2) = 4.9602 mol H2O
+    3. 4.9602 * 18.015 = 89.3581 g
+- Expected Result: 89.3581 g
+
+Reaction: CaCO3 -> CaO + CO2
+- Substance A: CaCO3 (100.086 g/mol)
+- Substance B: CaO (56.077 g/mol)
+- Coef A: 1
+- Coef B: 1
+- Input Mass A: 100.0 g
+- Calculation:
+    1. 100 / 100.086 = 0.9991 mol CaCO3
+    2. 0.9991 * (1 / 1) = 0.9991 mol CaO
+    3. 0.9991 * 56.077 = 56.0320 g
+- Expected Result: 56.0320 g
+
+===============================================================================
+6. TITRATION (Simplified 1:1 Ratio)
+===============================================================================
+Scenario: Unknown Molarity
+- M1 (Std): 0.1000 M
+- V1 (Std): 10.0 mL
+- V2 (Unk): 10.0 mL
+- Expected: (0.1 * 10) / 10 = 0.1000 M
+
+Scenario: Unknown Molarity (Different Volumes)
+- M1 (Std): 0.5000 M
+- V1 (Std): 5.0 mL
+- V2 (Unk): 25.0 mL
+- Expected: (0.5 * 5) / 25 = 0.1000 M
+
+Scenario: Required Volume
+- M1 (Std): 0.2000 M
+- M2 (Unk): 0.1000 M
+- V2 (Unk): 50.0 mL
+- Expected: (0.1 * 50) / 0.2 = 25.0000 mL

@@ -1,0 +1,71 @@
+# COMPREHENSIVE DEVELOPMENT PLAN: ChemE Process Suite
+
+## 🎯 Project Goal
+Develop a professional chemical engineering portfolio piece that demonstrates modular software architecture, OOP principles, and accurate engineering calculations.
+
+---
+
+## 🗺️ PHASE 1: FOUNDATION (Analytical & Stoichiometry)
+
+### 1. Stoichiometry Module (Current Focus)
+- [x] Pure Atomic Engine (`engine/stoichiometry.py`).
+- [x] Basic tool integration in `logic.py`.
+- [ ] **Refine Output:** Implement professional f-string formatting for results (e.g., "The calculated mass of B is 160.12 g").
+- [x] **Advanced Parsing:** Implement a formula parser to calculate molar masses of compounds (e.g., "H2SO4") automatically instead of asking the user for the molar mass.
+- [ ] **Limiting Reagent Tool:** Add logic to compare multiple reactants and identify the limiting reagent.
+
+### 2. Titration Module (Upcoming)
+- [ ] **Engine:** Create `engine/titration.py`.
+- [ ] **Core Logic:** Implement $C_1V_1 = C_2V_2$ and stoichiometric titration ratios.
+- [ ] **Interface:** Add a "Titration Tool" option to the `ChESuite` hub.
+
+### 3. Equilibrium Module
+- [ ] **Engine:** Create `engine/equilibrium.py`.
+- [ ] **Core Logic:** Implement $K_c$ and $K_p$ calculations.
+- [ ] **Solver:** Integrate `numpy` to solve quadratic/cubic equations for equilibrium concentrations (ICE Tables).
+
+### 4. Material Balance Module
+- [ ] **Engine:** Create `engine/material_balance.py`.
+- [ ] **Core Logic:** Steady-state mass balance calculations for single and multiple units.
+- [ ] **DoF Analysis:** Implement a "Degrees of Freedom" check to validate if a problem is solvable.
+
+---
+
+## 🗺️ PHASE 2: EXPANSION (Advanced Engineering)
+
+### 1. Thermodynamics
+- [ ] Implement Ideal Gas Law and Van der Waals equations.
+- [ ] Enthalpy and Entropy calculations.
+
+### 2. Fluid Flow & Heat Transfer
+- [ ] Pressure drop calculations (Bernoulli, Darcy-Weisbach).
+- [ ] Heat exchanger calculations (LMTD method).
+
+### 3. Reactor Design
+- [ ] Batch and CSTR sizing calculations.
+- [ ] Conversion and Selectivity logic.
+
+---
+
+## 🛠️ INFRASTRUCTURE & POLISH (Parallel Tasks)
+
+### 1. The GUI Transition (Major Milestone)
+- [ ] **Framework:** Move from `logic.py` CLI to `customtkinter` GUI.
+- [ ] **Architecture:** Create a separate `gui/` directory. The GUI will call the `engine/` functions exactly like the CLI does.
+- [ ] **UI Design:** Implement a sidebar menu for different tools and a results display area.
+
+### 2. Data Management
+- [x] Transition `engine_mmass.py` dictionary to a `data/elements.json` file for better scalability.
+- [ ] Implement a `data_manager.py` to handle loading and saving reference data.
+
+### 3. Quality Assurance
+- [ ] **Unit Testing:** Create a `tests/` directory. Write test scripts to verify engine accuracy against textbook problems.
+- [ ] **Error Handling:** Implement a custom `ChemistryError` class to handle chemical-specific errors gracefully.
+
+---
+
+## 📈 Success Criteria
+- Code follows the "Pure Engine" rule (No I/O in engines).
+- All modules are decoupled and modular.
+- GUI is fully functional and professional.
+- All calculations are verified against standard chemical engineering references.

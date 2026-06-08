@@ -1,6 +1,7 @@
 import engine.data.engine_mmass as mw
 import engine.stoichiometry as st
 import engine.molar_mass_parser as parser
+import engine.titration as titrate
 
 class ChESuite():
     def __init__(self):
@@ -91,12 +92,39 @@ class ChESuite():
             else:
                 print("Invalid input, please try again.")
 
+    def titration(self):
+        while True:
+            print("n/Titration Calculator")
+            print("1. Molarity")
+            print("2. Volume")
+            option = input("Enter number (enter q to exit): ")
+            try:
+                if option == "1":
+                    M1 = float(input("Enter Concentration 1: "))
+                    V1 = float(input("Enter Volume 1: "))
+                    V2 = float(input("Enter Volume 2: "))
+                    print(titrate.unknown_molarity(M1, V1, V2))
+
+                elif option == "2":
+                    M1 = float(input("Enter Concentration 1: "))
+                    M2 = float(input("Enter Concentration 2: "))
+                    V1 = float(input("Enter Volume 1: "))
+                    print(titrate.unknown_volume(M1, M2, V1))
+
+                elif option.upper() == "Q":
+                    break
+                else:
+                    print("Invalid option; try again")
+            except ValueError as e:
+                print(f"Invalid input: {e}")
+
     # The main menu
     def start(self):
         while self.running:
             print("\nMain Menu:")
             print("M - Molar Mass Lookup")
             print("S - Stoichiometry")
+            print("T - Titration")
             print("Q - Quit Program")
 
             choice = input("Select a tool: ").upper()
@@ -105,6 +133,8 @@ class ChESuite():
                 self.molarmass_tool()
             elif choice == "S":
                 self.stoichiometry()
+            elif choice == "T":
+                self.titration()
             elif choice == "Q":
                 print("Exiting... Goodbye!")
                 self.running = False
