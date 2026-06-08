@@ -24,7 +24,7 @@ class ChESuite():
     
     def stoichiometry(self):
         while True:
-            print("n/ Select Options (enter q to exit)")
+            print("\nSelect Options (enter q to exit)")
             print("1. Mass to Mole")
             print("2. Mole to Mass")
             print("3. Mole to Mole")
@@ -95,7 +95,7 @@ class ChESuite():
 
     def titration(self):
         while True:
-            print("n/Titration Calculator")
+            print("\nTitration Calculator")
             print("1. Molarity")
             print("2. Volume")
             option = input("Enter number (enter q to exit): ")
@@ -121,7 +121,7 @@ class ChESuite():
     
     def mass_balance(self):
         while True:
-            print("Mass Balance")
+            print("\nMass Balance")
             print("1. Degree of Freedom Analysis")
             print("2. Total Mass")
             print("3. Final concentration of two mixture")
@@ -139,14 +139,14 @@ class ChESuite():
 
                     while True:
                         try:
-                            in_num = float(input("Add the data for the input (enter any letters to exit: "))
+                            in_num = float(input("Add the data for the input (enter blank if done): "))
                             inp.append(in_num)
                         except ValueError:
                             break
 
                     while True:
                         try:
-                            out_num = float(input("Add the data for the output (enter any letters to exit: "))
+                            out_num = float(input("Add the data for the output (enter blank if done): "))
                             out.append(out_num)
                         except ValueError:
                             break
