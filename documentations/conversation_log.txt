@@ -108,3 +108,38 @@ PROJECT UPDATE: 2026-06-07 - Formula Parser & Data Decoupling
 15. Documentation Expansion:
 - Created `engine/parser_guide.md` for technical analysis of the recursive parser.
 - Created `def_of_terms.md` to define chemical and software engineering terminology.
+
+--------------------------------------------------------------------------------
+PROJECT UPDATE: 2026-06-08 - Titration Module & Planning
+
+16. Titration Engine Implementation:
+- Created `engine/titration.py` using a simplified M1V1 = M2V2 model (1:1 stoichiometry).
+- Implemented `unknown_molarity` and `required_volume` functions.
+- Maintained the "Pure Engine Rule" by keeping all calculations separate from I/O.
+
+17. Logic Integration & Debugging:
+- Added `titration()` method to `ChESuite` class in `logic.py`.
+- Integrated the Titration tool into the main hub menu (Choice 'T').
+- Resolved critical bugs during integration:
+    - Fixed missing closing parentheses in `print()` calls.
+    - Fixed `NameError` caused by comma instead of dot in `.upper()` method call.
+    - Corrected the function call for the "Volume" option to use the correct titration engine function.
+
+18. Quality Assurance & Testing:
+- Updated `documentations/test_cases.txt` with verified test scenarios for titration (Unknown Molarity and Required Volume).
+
+19. Current Strategy: "The Brain before the Face"
+- Consensus reached to prioritize the implementation of all core calculation engines (Equilibrium and Material Balance) before transitioning to the customtkinterer GUI.
+- Deferred "Limiting Reagent Tool" and professional stoichiometry polish to a later "polish pass" to accelerate the foundation build.
+
+--------------------------------------------------------------------------------
+PROJECT UPDATE: 2026-06-08 - Material Balance Initiation
+
+20. Material Balance Planning:
+- Established a three-tier implementation plan: Bookkeeper (Basic Mass Balance), Analyst (DoF Analysis), and Designer (Unit Operations).
+- Defined core engine tools for `engine/material_balance.py`: `calculate_dof`, `find_missing_mass`, and `calculate_mixture_conc`.
+- Aligned on "Simplified Logic" first—starting with DoF analysis to prove the architectural pattern.
+
+21. Equilibrium Module Strategy:
+- Decided on a "Calculator" approach: using user-input for equilibrium constants (K) instead of a database to prioritize logic over data curation.
+- Defined the "Physical Root" requirement for ICE solvers to ensure chemical validity.

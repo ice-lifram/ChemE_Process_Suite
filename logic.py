@@ -2,6 +2,7 @@ import engine.data.engine_mmass as mw
 import engine.stoichiometry as st
 import engine.molar_mass_parser as parser
 import engine.titration as titrate
+import engine.material_balance as mb
 
 class ChESuite():
     def __init__(self):
@@ -117,6 +118,53 @@ class ChESuite():
                     print("Invalid option; try again")
             except ValueError as e:
                 print(f"Invalid input: {e}")
+    
+    def mass_balance(self):
+        while True:
+            print("Mass Balance")
+            print("1. Degree of Freedom Analysis")
+            print("2. Total Mass")
+            print("3. Final concentration of two mixture")
+            option = input("Enter a number (enter q to exit): ")
+
+            try:
+                if option == "1": # This "might" be replaced to ask for list for the equations, which will be appended to a list
+                    num_unknown = float(input("Enter number of unknowns: "))
+                    num_equations = float(input("Enter number of equations: "))
+                    print(mb.dof_calculate(num_unknown, num_equations))
+
+                elif option == "2":
+                    inp = []
+                    out = []
+
+                    while True:
+                        try:
+                            in_num = float(input("Add the data for the input (enter any letters to exit: "))
+                            inp.append(in_num)
+                        except ValueError:
+                            break
+
+                    while True:
+                        try:
+                            out_num = float(input("Add the data for the output (enter any letters to exit: "))
+                            out.append(out_num)
+                        except ValueError:
+                            break
+
+                    print(mb.mass_balance(inp, out))
+                
+                elif option == "3":
+                    flow1 = float(input("Enter flow 1: "))
+                    flow2 = float(input("Enter flow 2: "))
+                    con1 = float(input("Enter concentration 1: "))
+                    con2 = float(input("Enter concentration 2: "))
+                    print(mb.mixture_calc(flow1, con1, flow2, con2))
+
+                elif option.lower() == "q":
+                    break
+
+            except ValueError as e:
+                print(f"Invalid value: {e}")
 
     # The main menu
     def start(self):
@@ -125,6 +173,7 @@ class ChESuite():
             print("M - Molar Mass Lookup")
             print("S - Stoichiometry")
             print("T - Titration")
+            print("B - Material Balance")
             print("Q - Quit Program")
 
             choice = input("Select a tool: ").upper()
@@ -135,6 +184,8 @@ class ChESuite():
                 self.stoichiometry()
             elif choice == "T":
                 self.titration()
+            elif choice == "B":
+                self.mass_balance()
             elif choice == "Q":
                 print("Exiting... Goodbye!")
                 self.running = False

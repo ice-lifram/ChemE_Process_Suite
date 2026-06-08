@@ -29,14 +29,38 @@ The **ChemE Process Suite** is a modular software toolkit designed for chemical 
     - `moles_to_mass()`: Converts moles to mass.
     - `mole_ratio_conversion()`: Handles inter-substance conversion using coefficients.
 - **Composite Functions:**
-    - `mass_mass_calculation()`: Chains atomic helpers to solve Mass A $\rightarrow$ Mass B problems.
+    - `mass_mass_calculation()`: Chains atomic helpers to solve Mass A -> Mass B problems.
 
-### 3. `logic.py`
+### 4. `engine/titration.py`
+**Purpose:** Volumetric analysis calculations.
+- **Architecture:** Simplified M1V1 = M2V2 model.
+- **Key Functions:**
+    - `unknown_molarity()`: Calculates unknown concentration.
+    - `required_volume()`: Calculates the volume of standard solution needed.
+
+### 5. `engine/equilibrium.py` (In Development)
+**Purpose:** Equilibrium constant and concentration calculations.
+- **Planned Architecture:** User-input based constants (Calculator approach).
+- **Planned Functions:**
+    - `calculate_k()`: Forward calculation of the equilibrium constant.
+    - `solve_ice_table()`: Solving for equilibrium concentrations using NumPy roots.
+    - `convert_kp_to_kc()`: Conversion between pressure and concentration constants.
+
+### 6. `engine/material_balance.py` (In Development)
+**Purpose:** Steady-state mass balance and system analysis.
+- **Planned Architecture:** Multi-tier complexity (Bookkeeper -> Analyst -> Designer).
+- **Planned Functions:**
+    - `calculate_dof()`: Degrees of Freedom analysis to check solvability.
+    - `find_missing_mass()`: Total mass balance to find missing stream values.
+    - `calculate_mixture_conc()`: Concentration calculations for mixing streams.
+
+### 7. `logic.py`
 **Purpose:** The main orchestration layer and User Interface (CLI) handler.
 - **Class: `ChESuite`**
     - `__init__(self)`: Initializes the application.
     - `molarmass_tool(self)`: Sub-loop for element lookups.
-    - `stoichiometry(self)`: Sub-loop for stoichiometry calculations, calling `engine.stoichiometry` functions.
+    - `stoichiometry(self)`: Sub-loop for stoichiometry calculations.
+    - `titration(self)`: Sub-loop for titration calculations.
     - `start(self)`: Main hub menu routing users to tools.
 
 ---
@@ -49,7 +73,7 @@ The **ChemE Process Suite** is a modular software toolkit designed for chemical 
 3. **Data Decoupling:** Data is separated from logic, allowing for future transitions to JSON or Database storage.
 
 ### Input Normalization Flow
-`User Input` $\rightarrow$ `.capitalize()` $\rightarrow$ `Dictionary Lookup` $\rightarrow$ `Result/Error`
+`User Input` -> `.capitalize()` -> `Dictionary Lookup` -> `Result/Error`
 
 ---
 

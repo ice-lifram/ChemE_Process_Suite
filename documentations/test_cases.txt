@@ -104,3 +104,26 @@ Scenario: Required Volume
 - M2 (Unk): 0.1000 M
 - V2 (Unk): 50.0 mL
 - Expected: (0.1 * 50) / 0.2 = 25.0000 mL
+
+===============================================================================
+7. MATERIAL BALANCE (Planned)
+===============================================================================
+Scenario: DoF Analysis
+- Unknowns: 3
+- Equations: 3
+- Expected: Solvable (DoF = 0)
+
+Scenario: DoF Analysis (Underspecified)
+- Unknowns: 5
+- Equations: 2
+- Expected: Underspecified (DoF = 3)
+
+Scenario: Total Mass Balance (Missing Stream)
+- Inlets: [100.0, 50.0]
+- Outlets: [120.0]
+- Expected: 150 - 120 = 30.0 g
+
+Scenario: Mixture Concentration
+- Flow 1: 100 g, Conc 1: 0.1 (10%)
+- Flow 2: 200 g, Conc 2: 0.2 (20%)
+- Expected: ((100 * 0.1) + (200 * 0.2)) / 300 = 0.1667 (16.67%)

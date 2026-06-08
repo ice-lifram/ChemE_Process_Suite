@@ -47,4 +47,26 @@ Day 3.2:
 		- Cleaner molar mass parser
 		- The Limiting Reagent Tool
 	- Create/Automate making the JSON file from the periodic table in engine_mmass.py
-	- 
+
+Day 4:
+	- Created titration.py
+	- Edited logic.py to implement titration.py
+	- Creating equilibrium.py
+		- Equilibrium solver
+		- ICE solver (still in development; may be removed)
+
+	- A new dependency added: numpy
+	- Created material_balance.py
+		- Steady state
+		- Unit still undecided
+		- Linear / Once-through Flow
+		- DoF Analysis only, no complex matrices
+		- No phase equilibrium and density shifts
+	- Implemented material_balance.py through logic.py
+	- This project is now considered Version 1
+	- Code tested
+	- Still in consideration:
+		- A default unit of measurement for all functions
+		- A cleaner user interface
+	- Might get a new set of test cases based on self-experiences on laboratories and lectures
+	- DoF analysis may be removed, since it can be easily determined.
