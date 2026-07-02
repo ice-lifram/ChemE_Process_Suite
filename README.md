@@ -1,5 +1,5 @@
 # Pro-ChE-ss Suite
-#### Created by Jesus Isaiah B. Marfil, BSChE @ BUCENG
+#### By Ice Lifram
 
 The Pro-ChE-ss Suite is a compilation of chemical engineering-related tools, calculators, and data that can be used by any aspiring Chemical Engineering students on their studies.
 
